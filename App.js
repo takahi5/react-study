@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import Tweet from "./components/Tweet";
 
 export default class App extends React.Component {
@@ -17,6 +17,17 @@ export default class App extends React.Component {
       }
     ]
   };
+
+  onPress = () => {
+    const tweet = {
+      author: "@yumi",
+      text: "Wow!",
+      fav: 0
+    };
+    //this.setState({ tweets: this.state.tweets.concat(tweet) });
+    this.setState({ tweets: [...this.state.tweets, tweet] });
+  };
+
   render() {
     const tweetItems = this.state.tweets.map((tweet, index) => (
       <Tweet
@@ -26,7 +37,12 @@ export default class App extends React.Component {
         key={index}
       />
     ));
-    return <View style={styles.container}>{tweetItems}</View>;
+    return (
+      <View style={styles.container}>
+        {tweetItems}
+        <Button title="つぶやく" onPress={this.onPress} />
+      </View>
+    );
   }
 }
 
